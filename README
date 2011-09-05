@@ -1,0 +1,3 @@
+just some info:
+
+compile it with -lm flag ... needed because of math.h
