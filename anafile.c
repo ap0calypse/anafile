@@ -5,13 +5,22 @@
 #include <locale.h>
 
 /*******************************************************************************
-
     project:    anafile
     author:     Manuel Fill (ap0calypse@agitatio.org)
+    
+    usage:      ./anafile PATH/TO/INPUTFILE
+
     purpose:    reads in a file and prints out information about every
                 character in the file. supports UTF-8.
-
+    license:    public domain
 *******************************************************************************/
+
+void usage() {
+    wprintf(L"\nUsage information:\n\n " \
+            L"\tanafile INPUTFILE\n" \
+            L"\t\tWhere INPUTFILE is the path to a textfile you wish to analyze.\n\n");
+    exit(1);
+}
 
 char *get_binary(wint_t number) {
     int numbits = sizeof(wint_t) * 8;
@@ -44,7 +53,7 @@ int main(int argc, char *argv[]) {
     
     setlocale(LC_ALL, "");
 
-    argc == 2 ? filename = argv[1] : exit(1);
+    (argc == 2) ? filename = argv[1] : usage();
     infd = fopen(filename, "rb, ccs=UNICODE");
 
     wprintf(L"\n# analysis of file: %s\n\n", filename);
